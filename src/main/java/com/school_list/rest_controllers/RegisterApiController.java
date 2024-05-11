@@ -3,6 +3,7 @@ package com.school_list.rest_controllers;
 import com.school_list.models.Teacher;
 import com.school_list.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class RegisterApiController {
 
     @PostMapping("/user/register")
     public Teacher registerNewUser(@RequestBody Teacher teacher) {
+        teacher.setPassword(BCrypt.hashpw(teacher.getPassword(), BCrypt.gensalt())); // храним хэш пароля
         teacherService.save(teacher);
         return teacher;
     }
@@ -25,16 +27,15 @@ public class RegisterApiController {
         return teacherService.getAllTeachers();
     }
 
-    @GetMapping("/user/get/{id}") // error 500
-    public Teacher getTeacherById(@PathVariable Integer teacherId) {
-       // return teacherService.getTeacherById(teacherId);
-        return null;
+    @GetMapping("/user/get/{id}")
+    public Optional<Teacher> getTeacherById(@PathVariable("id") Integer teacherId) {
+        return teacherService.getTeacherById(teacherId);
     }
 
-    /*@DeleteMapping("/user/delete/{id}") // error 500 думаю, что так же, не работает метод в repository - findTeacherById
-    public Teacher deleteTeacherById(@PathVariable int teacherId) {
+    @DeleteMapping("/user/delete/{id}")
+    public Optional<Teacher> deleteTeacherById(@PathVariable("id") int teacherId) {
         return teacherService.deleteTeacherById(teacherId);
-    }*/
+    }
 
     /*
     @PostMapping("/user/register")

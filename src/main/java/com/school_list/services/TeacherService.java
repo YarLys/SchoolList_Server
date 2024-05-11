@@ -19,15 +19,15 @@ public class TeacherService {
         teacherRepository.save(teacher);
     }
 
-    public void delete(Teacher teacher) {
+    /*public void delete(Teacher teacher) {
         teacherRepository.delete(teacher);
-    }
-
-    /*public Teacher deleteTeacherById(int teacherId) { // удаление учителя по id
-        Teacher temp = teacherRepository.findTeacherById(teacherId);
-        teacherRepository.delete(temp);
-        return temp;
     }*/
+
+    public Optional<Teacher> deleteTeacherById(Integer teacherId) { // удаление учителя по id
+        Optional<Teacher> temp = teacherRepository.findById(teacherId);
+        teacherRepository.deleteById(teacherId);
+        return temp;
+    }
 
     public Optional<Teacher> getTeacherById(Integer teacherId) {
         return teacherRepository.findById(teacherId);
@@ -50,8 +50,4 @@ public class TeacherService {
                 });
         return teachers;
     }
-
-    /*public int registerNewUserServiceMethod(String first_name, String surname, String last_name, String phone, String email, String password) {
-        return teacherRepository.registerNewUser(first_name, surname, last_name, phone, email, password);
-    }*/
 }
