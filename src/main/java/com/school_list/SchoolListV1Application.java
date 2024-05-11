@@ -11,9 +11,6 @@ public class SchoolListV1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SchoolListV1Application.class, args);
-
-		/*RegisterApiController controller = new RegisterApiController();
-		System.out.println(controller.getTeacherById(402));*/
 	}
 
 }
