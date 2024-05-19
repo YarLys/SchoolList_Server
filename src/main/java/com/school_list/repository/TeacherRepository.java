@@ -10,11 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
-    // почему не работает? не понятно
-    //Teacher findTeacherById(Integer teacherId);
-
-    //public void delete(int teacherId);
-
     /*@Transactional
     @Modifying
     @Query(value = "INSERT INTO teachers (first_name, surname, last_name, phone, email, password) VALUES (:first_name, :surname, :last_name, :phone, :email, :password);", nativeQuery = true)
