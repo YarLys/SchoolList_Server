@@ -3,6 +3,8 @@ package com.school_list.rest_controllers;
 import com.school_list.models.Teacher;
 import com.school_list.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +19,17 @@ public class RegisterApiController {
     TeacherService teacherService;
 
     @PostMapping("/user/register")
-    public Teacher registerNewUser(@RequestBody Teacher teacher) {
+    public ResponseEntity<Teacher> registerNewUser(@RequestBody Teacher teacher) {
+        List<Teacher> teachers = teacherService.getAllTeachers();
+        for (int i = 0; i < teachers.size(); i++) {
+            if (teachers.get(i).getEmail().equals(teacher.getEmail()) ||
+                teachers.get(i).getPhone().equals(teacher.getPhone())) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
+        }
         teacher.setPassword(BCrypt.hashpw(teacher.getPassword(), BCrypt.gensalt())); // храним хэш пароля
         teacherService.save(teacher);
-        return teacher;
+        return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
     @GetMapping("/user/get")
