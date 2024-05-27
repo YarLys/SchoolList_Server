@@ -17,13 +17,6 @@ public class MarkApiController {
     MarkService markService;
     @PostMapping("/save")
     public ResponseEntity<Mark> saveMark(@RequestBody Mark mark) {
-        List<Mark> marks = markService.getAllMarks();
-        System.out.println(mark.getId_student());
-        for (int i = 0; i < marks.size(); i++) {
-            if (marks.get(i).getId_student() == mark.getId_student()) {
-                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-            }
-        }
         markService.save(mark);
         return new ResponseEntity<>(mark, HttpStatus.OK);
     }
@@ -44,6 +37,8 @@ public class MarkApiController {
     }
     @GetMapping("/get_student_subject_marks/{student_id}/{subject_id}")
     public ResponseEntity<List<Mark>> getStudentSubjectMarks(@PathVariable("student_id") Integer studentId, @PathVariable("subject_id") Integer subjectId) {
+        System.out.println(studentId);
+        System.out.println(subjectId);
         List<Mark> marks = markService.getStudentSubjectMarks(studentId, subjectId);
         if (marks.isEmpty()) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(marks, HttpStatus.OK);

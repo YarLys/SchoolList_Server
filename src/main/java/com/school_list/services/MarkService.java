@@ -36,7 +36,7 @@ public class MarkService {
         List<Mark> marks = new ArrayList<>();
         Streamable.of(markRepository.findAll())
                 .forEach(mark -> {
-                    if (mark.getId_student() == studentId && mark.getSubject_id() == subjectId)
+                    if (mark.getId_student().equals(studentId) && mark.getSubject_id().equals(subjectId))
                         marks.add(mark);
                 });
         return marks;
