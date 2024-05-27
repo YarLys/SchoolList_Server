@@ -14,34 +14,17 @@ import java.util.Optional;
 public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
-
     public void save(Teacher teacher) {
         teacherRepository.save(teacher);
     }
-
-    /*public void delete(Teacher teacher) {
-        teacherRepository.delete(teacher);
-    }*/
-
     public Optional<Teacher> deleteTeacherById(Integer teacherId) { // удаление учителя по id
         Optional<Teacher> temp = teacherRepository.findById(teacherId);
         teacherRepository.deleteById(teacherId);
         return temp;
     }
-
     public Optional<Teacher> getTeacherById(Integer teacherId) {
         return teacherRepository.findById(teacherId);
     }
-    /*public Teacher getTeacherById(int teacherId) {
-        List<Teacher> teachers = getAllTeachers();
-        for (int i = 0; i < teachers.size(); i++) {
-            if (teachers.get(i).getId() == teacherId) {
-                return teachers.get(i);
-            }
-        }
-        return null;
-    }*/
-
     public List<Teacher> getAllTeachers() {
         List<Teacher> teachers = new ArrayList<>();
         Streamable.of(teacherRepository.findAll())

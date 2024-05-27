@@ -28,8 +28,8 @@ public class WorkloadService {
     public List<WorkLoad> getAllworkloads() {
         List<WorkLoad> workloads = new ArrayList<>();
         Streamable.of(workloadRepository.findAll())
-                .forEach(group -> {
-                    workloads.add(group);
+                .forEach(workload -> {
+                    workloads.add(workload);
                 });
         return workloads;
     }

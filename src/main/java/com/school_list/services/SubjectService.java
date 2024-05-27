@@ -29,8 +29,8 @@ public class SubjectService {
     public List<Subject> getAllSubjects() {
         List<Subject> subjects = new ArrayList<>();
         Streamable.of(subjectRepository.findAll())
-                .forEach(group -> {
-                    subjects.add(group);
+                .forEach(subject -> {
+                    subjects.add(subject);
                 });
         return subjects;
     }

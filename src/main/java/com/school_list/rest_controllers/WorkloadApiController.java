@@ -1,7 +1,9 @@
 package com.school_list.rest_controllers;
 
+import com.school_list.models.Subject;
 import com.school_list.models.WorkLoad;
 import com.school_list.services.WorkloadService;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +20,15 @@ public class WorkloadApiController {
 
     @PostMapping("/save/{name}")
     public ResponseEntity<WorkLoad> saveNewWorkLoad(@PathVariable("name") String name) {
-        /*System.out.println(WorkLoad.getName());
-        if (!WorkLoad.getName().isEmpty()) {
-            workloadService.save(WorkLoad);
-            return new ResponseEntity<>(WorkLoad, HttpStatus.OK);
+        List<WorkLoad> workloadList = workloadService.getAllworkloads();
+        for (int i = 0; i < workloadList.size(); i++) {
+            if (workloadList.get(i).getName().equals(name)) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
         }
-        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);*/
-        if (!name.isEmpty()) {
-            WorkLoad WorkLoad = new WorkLoad(name);
-            workloadService.save(WorkLoad);
-            return new ResponseEntity<>(WorkLoad, HttpStatus.OK);
-        }
-        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        WorkLoad WorkLoad = new WorkLoad(name);
+        workloadService.save(WorkLoad);
+        return new ResponseEntity<>(WorkLoad, HttpStatus.OK);
     }
 
     @GetMapping("/get")

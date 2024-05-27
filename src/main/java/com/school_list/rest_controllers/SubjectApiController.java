@@ -17,19 +17,16 @@ public class SubjectApiController {
     SubjectService subjectService;
 
     @PostMapping("/save/{name}")
-    public ResponseEntity<Subject> saveNewSubject(@PathVariable("name") String name /*@RequestBody Subject subject*/) {
-        /*System.out.println(subject.getName());
-        if (!subject.getName().equals("")) {
-            subjectService.save(subject);
-            return new ResponseEntity<>(subject, HttpStatus.OK);
+    public ResponseEntity<Subject> saveNewSubject(@PathVariable("name") String name) {
+        List<Subject> subjectList = subjectService.getAllSubjects();
+        for (int i = 0; i < subjectList.size(); i++) {
+            if (subjectList.get(i).getName().equals(name)) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
         }
-        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);*/
-        if (!name.isEmpty()) {
-            Subject subject = new Subject(name);
-            subjectService.save(subject);
-            return new ResponseEntity<>(subject, HttpStatus.OK);
-        }
-        else return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        Subject subject = new Subject(name);
+        subjectService.save(subject);
+        return new ResponseEntity<>(subject, HttpStatus.OK);
     }
 
     @GetMapping("/get")

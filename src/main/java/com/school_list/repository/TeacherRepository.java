@@ -10,7 +10,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
-    /*@Transactional
+    // Переопределение методов при необходимости
+}
+
+/*@Transactional
     @Modifying
     @Query(value = "INSERT INTO teachers (first_name, surname, last_name, phone, email, password) VALUES (:first_name, :surname, :last_name, :phone, :email, :password);", nativeQuery = true)
     int registerNewUser(@Param("first_name") String first_name,
@@ -19,4 +22,3 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
                         @Param("phone") String phone,
                         @Param("email") String email,
                         @Param("password") String password);*/
-}

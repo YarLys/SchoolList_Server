@@ -7,7 +7,6 @@ import java.util.Date;
 @Entity
 @Table(name = "teachers")
 public class Teacher { // Класс сущности учитель. Является пользователем приложения (может регистрироваться)
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
