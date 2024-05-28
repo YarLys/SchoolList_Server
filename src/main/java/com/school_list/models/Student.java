@@ -18,7 +18,7 @@ public class Student {
     @Column(name = "phone")
     private String phone;
     @Column(name = "id_class")
-    private String class_id;
+    private String id_class;
 
     public Integer getId() {
         return id;
@@ -60,29 +60,29 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getClass_id() {
-        return class_id;
+    public String getId_class() {
+        return id_class;
     }
 
-    public void setClass_id(String class_id) {
-        this.class_id = class_id;
+    public void setId_class(String id_class) {
+        this.id_class = id_class;
     }
 
-    public Student(Integer id, String first_name, String surname, String last_name, String phone, String class_id) {
+    public Student(Integer id, String first_name, String surname, String last_name, String phone, String id_class) {
         this.id = id;
         this.first_name = first_name;
         this.surname = surname;
         this.last_name = last_name;
         this.phone = phone;
-        this.class_id = class_id;
+        this.id_class = id_class;
     }
 
-    public Student(String first_name, String surname, String last_name, String phone, String class_id) {
+    public Student(String first_name, String surname, String last_name, String phone, String id_class) {
         this.first_name = first_name;
         this.surname = surname;
         this.last_name = last_name;
         this.phone = phone;
-        this.class_id = class_id;
+        this.id_class = id_class;
     }
     public Student() {}
 }

@@ -15,17 +15,18 @@ import java.util.Optional;
 public class StudentApiController {
     @Autowired
     StudentService studentService;
-    @PostMapping("/save/{id_class}")
-    public ResponseEntity<Student> saveStudent(@RequestBody Student student, @PathVariable("id_class") String id_class) {
+    @PostMapping("/save")
+    public ResponseEntity<Student> saveStudent(@RequestBody Student student/*, @PathVariable("id_class") String id_class*/) {
         List<Student> students = studentService.getAllStudents();
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getFirst_name().equals(student.getFirst_name()) &&
             students.get(i).getSurname().equals(student.getSurname()) && students.get(i).getPhone().equals(student.getPhone())
-            && students.get(i).getClass_id().equals(id_class)) {
+            //&& students.get(i).getClass_id().equals(id_class)) {
+            && students.get(i).getId_class().equals(student.getId_class())) {
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
         }
-        student.setClass_id(id_class);
+        //student.setClass_id(id_class);
         studentService.save(student);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }

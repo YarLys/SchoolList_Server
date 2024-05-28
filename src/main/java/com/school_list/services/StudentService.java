@@ -32,7 +32,7 @@ public class StudentService {
         List<Student> students = new ArrayList<>();
         Streamable.of(studentRepository.findAll())
                 .forEach(student -> {
-                    if (student.getClass_id().equals(id_class))
+                    if (student.getId_class().equals(id_class))
                         students.add(student);
                 });
         return students;
